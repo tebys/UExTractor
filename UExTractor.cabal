@@ -1,0 +1,32 @@
+cabal-version:      3.0
+name:               UExTractor
+version:            0.1.0.0
+license:            Apache-2.0
+license-file:       LICENSE
+author:             Esteban Podesta
+maintainer:         esteban.podesta@gmail.com
+category:           Data
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+
+common warnings
+    ghc-options: -Wall
+
+
+executable UExTractor
+    import:           warnings
+    main-is:          Main.hs
+    other-modules:    Parser
+    -- other-extensions:
+    build-depends:    base ^>=4.17.2.1
+    hs-source-dirs:   app
+    Include-dirs:     extra/tree-sitter/lib/include
+                    , extra/tree-sitter/lib/src
+                    ,extra/tree-sitter-cpp/src
+    c-sources:        extra/tree-sitter/lib/src/lib.c
+                    , extra/tree-sitter-cpp/src/parser.c
+                    , extra/tree-sitter-cpp/src/scanner.c
+                    , extra/cbits/Utils.c
+    extra-libraries:  stdc++
+    cc-options:       -std=c99 -Wno-implicit-function-declaration -Wno-unused-result
+    default-language: Haskell2010
